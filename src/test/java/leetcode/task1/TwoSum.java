@@ -2,70 +2,30 @@ package leetcode.task1;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class TwoSum {
 
     @Test
     public void test() {
         Solution solution = new Solution();
-        assertEquals(1, solution.romanToInt("I"));
-        assertEquals(3, solution.romanToInt("III"));
-        assertEquals(14, solution.romanToInt("XIV"));
-        assertEquals(1994, solution.romanToInt("MCMXCIV"));
+        assertArrayEquals(new int[]{0, 1}, solution.twoSum(new int[]{2, 7, 11, 15}, 9));
+        assertArrayEquals(new int[]{1, 2}, solution.twoSum(new int[]{3, 2, 4}, 6));
+        assertArrayEquals(new int[]{0, 1}, solution.twoSum(new int[]{3, 3}, 6));
     }
 }
 
 class Solution {
 
-    enum RomanDigit {
-        I("I", 1),
-        V("V", 5),
-        X("X", 10),
-        L("L", 50),
-        C("C", 100),
-        D("D", 500),
-        M("M", 1000);
-
-        RomanDigit(String letter, int value) {
-            this.letter = letter;
-            this.value = value;
-        }
-
-        String letter;
-        int value;
-
-        public static RomanDigit parse(String s) {
-            for (RomanDigit digit : RomanDigit.values()) {
-                if (digit.letter.equals(s)) {
-                    return digit;
+    public int[] twoSum(int[] nums, int target) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
                 }
             }
-            throw new RuntimeException("Invalid letter");
         }
-
+        throw new RuntimeException("Not found");
     }
-
-    public int romanToInt(String s) {
-        if (s.length() == 0) {
-            return 0;
-        } else if (s.length() == 1) {
-            return RomanDigit.parse(s).value;
-        } else {
-            RomanDigit d1 = RomanDigit.parse(s.substring(0, 1));
-            RomanDigit d2 = RomanDigit.parse(s.substring(1, 2));
-
-            if (isTouple(d1, d2)) {
-                return (d2.value - d1.value) + romanToInt(s.substring(2));
-            } else {
-                return d1.value + romanToInt(s.substring(1));
-            }
-        }
-    }
-
-    private boolean isTouple(RomanDigit d1, RomanDigit d2) {
-        return d1.value < d2.value;
-    }
-
 
 }
