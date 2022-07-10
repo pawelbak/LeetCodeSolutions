@@ -3,6 +3,7 @@ package leetcode.task2;
 import leetcode.utils.ListNode;
 import org.junit.jupiter.api.Test;
 
+import static leetcode.utils.ListNodeUtils.arrayToListNode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddTwoNumbers {
@@ -17,23 +18,6 @@ public class AddTwoNumbers {
         assertEquals(8, result.next.next.val);
     }
 
-    ListNode arrayToListNode(int[] arr) {
-        ListNode first = null;
-        ListNode current = null;
-        for (int item : arr) {
-            ListNode node = new ListNode(item);
-            if (first == null) {
-                first = node;
-            }
-            if (current == null) {
-                current = node;
-            } else {
-                current.next = node;
-                current = node;
-            }
-        }
-        return first;
-    }
 }
 
 class Solution {
