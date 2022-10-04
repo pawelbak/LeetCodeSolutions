@@ -1,4 +1,4 @@
-package leetcode.leet189;
+package leetcode.task189;
 
 import org.junit.jupiter.api.Test;
 
